@@ -22,5 +22,11 @@ USER jovyan
 
 RUN pip install --no-cache-dir networkx scipy
 
+RUN mamba install -c conda-forge r-survey -y && \
+    fix-permissions $CONDA_DIR && \
+    fix-permissions /home/$NB_USER && \
+    mamba clean -a -y
+
+
 # Override command to disable running jupyter notebook at launch
 # CMD ["/bin/bash"]
