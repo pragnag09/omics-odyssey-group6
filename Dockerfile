@@ -31,5 +31,14 @@ RUN mamba install -y -c conda-forge -c bioconda \
     r-survey && \
     mamba clean -a -y
 
+# 4) Create kegganog conda environment and install kegganog via pip
+RUN conda create -n kegganog python=3.10 pip -y && \
+    conda run -n kegganog pip install kegganog && \
+    conda clean -a -y
+
+# Optional: activate kegganog by default
+# SHELL makes sure future RUN commands use conda env
+SHELL ["conda", "run", "-n", "kegganog", "/bin/bash", "-c"]
+
 # Override command to disable running jupyter notebook at launch
-# CMD ["/bin/bash"]
+CMD ["/bin/bash"]
