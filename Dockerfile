@@ -18,7 +18,7 @@ RUN apt-get -y install htop
 # 3) install packages using notebook user
 USER jovyan
 
-RUN conda install -y scikit-learn kraken2 
+RUN conda install -y scikit-learn bioconda::kraken2
 
 RUN pip install --no-cache-dir networkx scipy eggnog-mapper
 
