@@ -31,4 +31,4 @@ RUN mamba install -c conda-forge r-survey -y && \
 USER jovyan
 
 # Override command to disable running jupyter notebook at launch
-CMD ["/bin/bash"]
+# CMD ["/bin/bash"]
