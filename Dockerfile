@@ -22,8 +22,9 @@ USER jovyan
 RUN conda install -y scikit-learn
 
 RUN mamba install -y -c conda-forge -c bioconda scikit-learn kraken2
+RUN mamba install -y -c bioconda -c conda-forge eggnog-mapper networkx scipy
 
-RUN pip install --no-cache-dir networkx scipy eggnog-mapper
+RUN pip install --no-cache-dir networkx scipy
 
 USER root
 RUN mamba install -c conda-forge r-survey -y && \
