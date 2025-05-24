@@ -13,12 +13,15 @@ LABEL maintainer="UC San Diego ITS/ETS <ets-consult@ucsd.edu>"
 # 2) change to root to install packages
 USER root
 
+RUN apt-get update && apt-get -y install htop
 RUN apt-get -y install htop
 
 # 3) install packages using notebook user
 USER jovyan
 
-RUN conda install -y scikit-learn bioconda::kraken2
+RUN conda install -y scikit-learn
+
+RUN mamba install -y -c conda-forge -c bioconda scikit-learn kraken2
 
 RUN pip install --no-cache-dir networkx scipy eggnog-mapper
 
