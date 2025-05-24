@@ -28,6 +28,7 @@ RUN mamba install -y -c conda-forge -c bioconda \
     eggnog-mapper \
     networkx \
     scipy \
+    gtdbtk \
     r-survey && \
     mamba clean -a -y
 
