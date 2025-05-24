@@ -18,7 +18,7 @@ RUN apt-get -y install htop
 # 3) install packages using notebook user
 USER jovyan
 
-# RUN conda install -y scikit-learn
+# RUN conda install -y scikit-learn kraken2
 
 RUN pip install --no-cache-dir networkx scipy
 
@@ -28,7 +28,27 @@ RUN mamba install -c conda-forge r-survey -y && \
     fix-permissions /home/$NB_USER && \
     mamba clean -a -y
 
+FROM ubuntu:latest
+RUN apt-get update && apt-get install -y \
+    wget \
+    python3 \
+    python3-pip \
+    diamond \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip3 install --upgrade pip
+RUN pip3 install --no-cache-dir \
+    requests \
+    tqdm \
+    pandas 
+RUN pip3 install --no-cache-dir eggnog-mapper
+WORKDIR /opt/eggnog-mapper
+ENV PATH="/opt/eggnog-mapper:${PATH}"
+RUN mkdir -p /data/eggnog_db
+VOLUME /data/eggnog_db
+WORKDIR /data
+
 USER jovyan
 
 # Override command to disable running jupyter notebook at launch
-# CMD ["/bin/bash"]
+CMD ["/bin/bash"]
